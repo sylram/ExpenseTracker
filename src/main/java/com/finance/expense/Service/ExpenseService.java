@@ -24,13 +24,11 @@ public class ExpenseService {
         return expenses;
     }
 
-    public Expense getExpense(Long id) throws Exception{
-        Expense expense = null;
-            expense = expenseRepository.findById(id).get();
-        return expense;
+    public Expense getExpense(Long id){
+        return expenseRepository.findById(id).get();
     }
 
-    public Expense createExpense (Expense expense) throws Exception{
+    public Expense createExpense (Expense expense){
         return expenseRepository.save(expense);
     }
 

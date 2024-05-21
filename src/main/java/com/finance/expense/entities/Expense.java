@@ -1,9 +1,6 @@
 package com.finance.expense.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,13 +11,18 @@ public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String name;
-    Date date;
-    Double amount;
+    @Column(name = "id")
+    private Long id;
+    private String name;
+    private Date date;
+    private Double amount;
 
-    String pattern = "yyyy-MM-dd";
-    SimpleDateFormat simpleDateFormat;
+    @ManyToOne()
+    @JoinColumn(name="category_id")
+    private Category category;
+
+
+
 
     public Long getId () {
         return id;
@@ -40,14 +42,14 @@ public class Expense {
 
     public String getDate () {
         String pattern = "yyyy-MM-dd";
-        simpleDateFormat = new SimpleDateFormat(pattern);
+        SimpleDateFormat simpleDateFormat= new SimpleDateFormat(pattern);
         return simpleDateFormat.format(date);
     }
 
     public void setDate (String date) throws ParseException {
         try {
             String pattern = "yyyy-MM-dd";
-            simpleDateFormat = new SimpleDateFormat(pattern);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
             this.date = simpleDateFormat.parse(date);
         } catch (Exception e){
             e.printStackTrace();
@@ -61,4 +63,13 @@ public class Expense {
     public void setAmount (Double amount) {
         this.amount = amount;
     }
+
+    public Category getCategory () {
+        return category;
+    }
+
+    public void setCategory (Category category) {
+        this.category = category;
+    }
+
 }

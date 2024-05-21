@@ -37,6 +37,7 @@ public class ExpenseService {
         expenseToUpdate.setDate(expense.getDate());
         expenseToUpdate.setAmount(expense.getAmount());
         expenseToUpdate.setName(expense.getName());
+        expenseToUpdate.setCategory(expense.getCategory());
         expenseRepository.save(expenseToUpdate);
         return expenseToUpdate;
     }
